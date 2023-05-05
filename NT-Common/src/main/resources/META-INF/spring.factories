@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  net.shihome.nt.comm.config.NtCommonAutoConfiguration

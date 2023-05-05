@@ -1,0 +1,17 @@
+nt:
+  client:
+    server-address: 127.0.0.1:9070
+    ca-path: /Users/lyndon/tmp/ca.crt
+    client-cert-path: /Users/lyndon/tmp/client.crt
+    client-key-path: /Users/lyndon/tmp/pkcs8_client.key
+    client-key-password:
+    work-group-threads: 4
+    instance-list:
+      - instance-name: remote.ssh
+        address: 20.247.108.116:22
+      - instance-name: remote.https
+        address: github.com:443
+#logging:
+#  level:
+#    net.shihome.nt.client.tcp.NettyTcpInstanceClientHandler: DEBUG
+#    net.shihome.nt.comm.lang: DEBUG
