@@ -49,7 +49,7 @@ jobs:
           echo "DOCKER_REGISTRY=docker.io" >> $GITHUB_ENV
           echo "DOCKER_USERNAME=${{ secrets.DOCKERHUB_USER }}" >> $GITHUB_ENV
           echo "DOCKER_PASSWORD=${{ secrets.DOCKERHUB_TOKEN }}" >> $GITHUB_ENV
-          TAG=${{ github.ref }}
+          TAG=${{ github.ref_name }}
           echo "TAG=${TAG#v}" >> $GITHUB_ENV
       - name: "Log in to the Container registry"
         uses: docker/login-action@v2
@@ -69,8 +69,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
           body: TODO
           draft: true
           prerelease: false
