@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.shihome</groupId>
     <artifactId>NetTunnel</artifactId>
-    <version>v1.0.0</version>
+    <version>1.0.0</version>
     <modules>
         <module>NT-Common</module>
         <module>NT-Server</module>
@@ -13,9 +13,9 @@
     </modules>
     <packaging>pom</packaging>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <java.version>1.8</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <java.version>11</java.version>
         <spring-cloud.version>2021.0.1</spring-cloud.version>
         <spring-boot.version>2.6.6</spring-boot.version>
         <hessian.version>4.0.65</hessian.version>
@@ -108,6 +108,7 @@
                     <version>${spring-boot.version}</version>
                     <configuration>
                         <mainClass>${start-class}</mainClass>
+                        <outputDirectory>../dist/</outputDirectory>
                     </configuration>
                     <executions>
                         <execution>

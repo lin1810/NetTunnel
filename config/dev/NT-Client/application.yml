@@ -1,9 +1,9 @@
 nt:
   client:
     server-address: 127.0.0.1:9070
-    ca-path: /Users/lyndon/tmp/ca.crt
-    client-cert-path: /Users/lyndon/tmp/client.crt
-    client-key-path: /Users/lyndon/tmp/pkcs8_client.key
+    ca-path: /tmp/ca.crt
+    client-cert-path: /tmp/client.crt
+    client-key-path: /tmp/pkcs8_client.key
     client-key-password:
     work-group-threads: 4
     instance-list:

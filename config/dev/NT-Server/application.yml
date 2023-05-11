@@ -2,9 +2,9 @@ nt:
   server:
     ip: 0.0.0.0
     port: 9070
-    ca-path: /Users/lyndon/tmp/ca.crt
-    server-cert-path: /Users/lyndon/tmp/server.crt
-    server-key-path: /Users/lyndon/tmp/pkcs8_server.key
+    ca-path: /tmp/ca.crt
+    server-cert-path: /tmp/server.crt
+    server-key-path: /tmp/pkcs8_server.key
     server-key-password:
     instance-list:
       - instance-name: remote.ssh
