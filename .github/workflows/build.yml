@@ -63,7 +63,7 @@ jobs:
         env:
           BASE_IMAGE: eclipse-temurin:${{ matrix.java-version }}-jre
         run: |
-          make docker.push || make docker.push
+          make docker.push
       - name: "Create release"
         uses: actions/create-release@v1
         env:
