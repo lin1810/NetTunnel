@@ -61,9 +61,9 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - name: "Build and save docker images"
         env:
-          BASE_IMAGE: eclipse-temurin:${{ matrix.java-version }}-jre
+          BASE_IMAGE: eclipse-temurin:11-jre
         run: |
-          make docker.push
+          make docker.push || make docker.push
       - name: "Create release"
         uses: actions/create-release@v1
         env:

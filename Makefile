@@ -19,19 +19,16 @@ endif
 %.server: NAME = $(SERVER_NAME)
 %.client: NAME = $(CLIENT_NAME)
 
-test.client:
-	@echo $(shell echo $(CLIENT_NAME) | tr A-Z a-z)
-
 docker.%: PLATFORMS =
 docker.%: LOAD_OR_PUSH = --load
 push.%: PLATFORMS = --platform linux/amd64,linux/arm64/v8,linux/arm/v7
 push.%: LOAD_OR_PUSH = --push
 DIST_JAR_NAME = $(wildcard ${CONTEXT}/NT-$(NAME)-*.jar)
 
-docker.% push.docker.%:
+build.docker.% push.docker.%:
 	$(DOCKER_RULE)
 
-docker.all: $(DOCKER_TARGETS)
+docker.build: $(DOCKER_TARGETS:%=build.%)
 docker.push: $(DOCKER_TARGETS:%=push.%)
 
 define DOCKER_RULE
