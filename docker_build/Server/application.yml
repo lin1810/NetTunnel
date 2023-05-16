@@ -1,0 +1,11 @@
+nt:
+  server:
+    ip: ${BIND_ADDRESS:0.0.0.0}
+    port: ${BIND_PORT:9070}
+    ca-path: ${CERT_PATH}/ca.crt
+    server-cert-path: ${CERT_PATH}/server.crt
+    server-key-path: ${CERT_PATH}/server_pkcs8.key
+#    server-key-password:
+#logging:
+#  level:
+#    net.shihome.nt.server.tcp: DEBUG

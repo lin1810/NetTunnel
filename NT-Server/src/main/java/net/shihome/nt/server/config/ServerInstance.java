@@ -8,7 +8,7 @@ public class ServerInstance {
   private String address;
   private int permits = -1;
   private int permitsTimeoutInSecond = 15;
-  private int slidingWindowSize = 30;
+  private int slidingWindowSize = 10;
 
   public int getPermitsTimeoutInSecond() {
     return permitsTimeoutInSecond;

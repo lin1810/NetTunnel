@@ -33,10 +33,10 @@ docker.push: $(DOCKER_TARGETS:%=push.%)
 
 define DOCKER_RULE
 	mkdir -p $(DOCKER_BUILD_TOP)/$(NAME)
-	cp -r $(DIST_JAR_NAME) $(DOCKER_BUILD_TOP)/$(NAME)
+	cp $(DIST_JAR_NAME) $(DOCKER_BUILD_TOP)/$(NAME)/app.jar
 	docker buildx create --use --driver docker-container --name nt_builder > /dev/null 2>&1 || true
 	docker buildx build $(PLATFORMS) $(LOAD_OR_PUSH) \
-		--no-cache --build-arg DIST_JAR_NAME=$(shell basename $(DIST_JAR_NAME)) \
+		--no-cache \
 		-t $(HUB)$(shell echo $(NAME) | tr A-Z a-z):$(TAG) \
 		-t $(HUB)$(shell echo $(NAME) | tr A-Z a-z):latest \
 		$(DOCKER_BUILD_TOP)/$(NAME)

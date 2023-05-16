@@ -1,0 +1,11 @@
+nt:
+  client:
+    server-address: ${SERVER_ADDRESS:"127.0.0.1:9070"}
+    ca-path: ${CERT_PATH}/ca.crt
+    client-cert-path: ${CERT_PATH}/client.crt
+    client-key-path: ${CERT_PATH}/client_pkcs8.key
+#    client-key-password:
+#logging:
+#  level:
+#    net.shihome.nt.client.tcp.NettyTcpInstanceClientHandler: DEBUG
+#    net.shihome.nt.comm.lang: DEBUG

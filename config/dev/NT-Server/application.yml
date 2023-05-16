@@ -2,13 +2,14 @@ nt:
   server:
     ip: 0.0.0.0
     port: 9070
-    ca-path: /tmp/ca.crt
-    server-cert-path: /tmp/server.crt
-    server-key-path: /tmp/pkcs8_server.key
-    server-key-password:
+#    ca-path: /tmp/ca.crt
+#    server-cert-path: /tmp/server.crt
+#    server-key-path: /tmp/pkcs8_server.key
+#    server-key-password:
     instance-list:
       - instance-name: remote.ssh
         port: 922
+
       - instance-name: remote.https
         port: 9443
 #logging:
