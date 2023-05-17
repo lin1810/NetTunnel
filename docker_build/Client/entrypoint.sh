@@ -26,13 +26,17 @@ usage() { local RC="${1:-0}"
     echo "Usage: ${0##*/} [-opt] [command]
 Options (fields in '[]' are optional, '<>' are required):
     -h          This help
-    -i \"<name;port>[;slidingWindowSize]\"
+    -i \"<name;address:port>[;slidingWindowSize]\"
                 Configure a tunnel
-                required arg: \"<name>;<port>\"
+                required arg: \"<name>;<address:port>\"
                 <name> tunnel name
-                <port> tunnel bind port
+                <address:port> target service IP address and port
                 NOTE: for the default value, just leave blank
                 [slidingWindowSize] default:'10'
+    -s \"<server address:port>\"
+                required arg: \"<server address:port>\"
+                NOTE: for the default value, just leave blank
+                <server address:port> server side IP address and port default:'127.0.0.1:9070'
 " >&2
     exit $RC
 }
@@ -57,7 +61,7 @@ addInstance() { local name="$1" address="$2" slidingWindowSize="${3:-""}"  \
 # Arguments:
 #   address) server address
 # Return: result
-serverAddress() { local address="$1" file=$CONFIG_PATH/application-instance.yml
+serverAddress() { local address="$1"
     export SERVER_ADDRESS=$address
 }
 
