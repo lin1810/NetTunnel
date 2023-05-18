@@ -277,7 +277,7 @@ services:
 
 # license
 
-Commercial use of this project is prohibited (including but not limited to post-build advertisements or sale of members, packaged and put on store shelves, etc.), in non-commercial cases follow the [MIT license](https://github.com/lin1810/NetTunnel/blob /main/LICENSE), when the two conflict, the non-commercial principle takes precedence.
+Commercial use of this project is prohibited (including but not limited to post-build advertisements or sale of members, packaged and put on store shelves, etc.), in non-commercial cases follow the [MIT license](https://github.com/lin1810/NetTunnel/blob/main/LICENSE), when the two conflict, the non-commercial principle takes precedence.
 
 # Issues
 
