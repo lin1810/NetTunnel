@@ -21,7 +21,7 @@ If you don’t have a cloud server, you can take a look at
 
 [Tencent Cloud 30~50 Yuan’s special offer server](https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=df09cb80975a46e4aeef9a07e6a5bf78&from=console)
 
-[Alibaba Cloud Server 0 yuan trial first purchase as low as 0.9 yuan/month](https://www.aliyun.com/minisite/goods?userCode=69jhyszs)
+[Alibaba Cloud Server 0 yuan trial first purchase as low as 0.9 yuan/month](https://aliyun.com/minisite/goods?userCode=69jhyszs)
 
 By default, no thunnel instance is configured, additional ones can be added.
 

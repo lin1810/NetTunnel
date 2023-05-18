@@ -17,7 +17,7 @@ Net Tunnel 通过公网和内网之间创建数个加密的长连接隧道，将
 
 # 如何使用服务端镜像
 
-如果您没有云服务器，可以看看[腾讯云 30~50元首单的特价服务器](https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=df09cb80975a46e4aeef9a07e6a5bf78&from=console)，[阿里云 服务器0元试用 首购低至0.9元/月起](https://www.aliyun.com/minisite/goods?userCode=69jhyszs)
+如果您没有云服务器，可以看看[腾讯云 30~50元首单的特价服务器](https://cloud.tencent.com/act/cps/redirect?redirect=2446&cps_key=df09cb80975a46e4aeef9a07e6a5bf78&from=console)，[阿里云 服务器0元试用 首购低至0.9元/月起](https://aliyun.com/minisite/goods?userCode=69jhyszs)
 
 默认情况下没有配置通道实例，可以在后续增加。
 
