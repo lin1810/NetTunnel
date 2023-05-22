@@ -175,7 +175,7 @@ services:
 
 ## Directory client_config 
 
-Please copy all the files under `server_config/client_config` on the server side to `/NT/config` under the client container directory.
+Please copy all the files under `server_config/client_config` on the server side to `/NT/config` under the client container directory. For example, the `client_config` directory mounted by the above container
 
 Includes:
 

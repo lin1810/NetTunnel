@@ -171,7 +171,7 @@ services:
 
 ## client_config 目录结构
 
-请拷贝服务端 `server_config/client_config`下的所有文件到客户端容器目录`/NT/config`下。
+请拷贝服务端 `server_config/client_config`下的所有文件到客户端容器目录`/NT/config`下。如上容器所挂载的 `client_config` 目录
 
 文件包括：
 
