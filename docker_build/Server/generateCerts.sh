@@ -18,7 +18,7 @@ createCert() { local certName="$1"
     fi
 
     if [ ! -f $CERT_PATH/$certName.crt ]; then
-      openssl x509 -req -CA $CERT_PATH/ca.crt -CAkey $CERT_PATH/ca.key -CAcreateserial -in $CERT_PATH/$certName.csr -out $CERT_PATH/$certName.crt
+      openssl x509 -req -days 3650 -CA $CERT_PATH/ca.crt -CAkey $CERT_PATH/ca.key -CAcreateserial -in $CERT_PATH/$certName.csr -out $CERT_PATH/$certName.crt
       echo generate $CERT_PATH/$certName.crt success
     else
       echo exist and skip $CERT_PATH/$certName.crt.
@@ -48,7 +48,7 @@ else
 fi
 
 if [ ! -f $CERT_PATH/ca.crt ]; then
-  openssl x509 -req -in $CERT_PATH/ca.csr -signkey $CERT_PATH/ca.key -out $CERT_PATH/ca.crt
+  openssl x509 -req -days 3650 -in $CERT_PATH/ca.csr -signkey $CERT_PATH/ca.key -out $CERT_PATH/ca.crt
   echo generate $CERT_PATH/ca.crt success
 else
   echo exist and skip $CERT_PATH/ca.crt.
