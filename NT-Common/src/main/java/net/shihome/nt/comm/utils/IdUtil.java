@@ -6,15 +6,15 @@ import javax.annotation.Resource;
 
 public class IdUtil {
 
-  @Resource private IdGenerator idGenerator;
+    private static IdUtil INSTANCE;
+    @Resource
+    private IdGenerator idGenerator;
 
-  private static IdUtil INSTANCE;
+    protected IdUtil() {
+        INSTANCE = this;
+    }
 
-  protected IdUtil() {
-    INSTANCE = this;
-  }
-
-  public static String getNextId() {
-    return INSTANCE.idGenerator.generateId().toString();
-  }
+    public static String getNextId() {
+        return INSTANCE.idGenerator.generateId().toString();
+    }
 }

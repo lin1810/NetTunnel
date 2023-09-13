@@ -46,11 +46,6 @@ public class ExceptionUtil {
     return rootCause;
   }
 
-  public static Throwable getMostSpecificCause(Throwable original) {
-    Throwable rootCause = getRootCause(original);
-    return (rootCause != null ? rootCause : original);
-  }
-
   public static String getErrorInfo(Throwable t) {
     try {
       StringWriter sw = new StringWriter();

@@ -3,7 +3,6 @@ package net.shihome.nt.comm.config;
 import com.caucho.hessian.io.Hessian2Input;
 import net.shihome.nt.comm.service.RpcSerializer;
 import net.shihome.nt.comm.service.impl.HessianSerializer;
-import net.shihome.nt.comm.utils.ApplicationContextHolder;
 import net.shihome.nt.comm.utils.IdUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -14,12 +13,6 @@ import org.springframework.util.SimpleIdGenerator;
 
 @Configuration(proxyBeanMethods = false)
 public class NtCommonAutoConfiguration {
-
-    @Bean
-    public ApplicationContextHolder applicationContextHolder() {
-        return new ApplicationContextHolder() {
-        };
-    }
 
     @Bean
     @ConditionalOnMissingBean
