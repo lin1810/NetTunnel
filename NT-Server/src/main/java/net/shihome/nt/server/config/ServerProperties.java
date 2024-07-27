@@ -14,6 +14,11 @@ public class ServerProperties {
 
   private File serverCertPath;
   private File serverKeyPath;
+  /**
+   * ip2region.xdb path
+   */
+  private File ipRegionPath;
+  private String[] accessIpRegion;
   private String serverKeyPassword;
   private File caPath;
   private double writeLimit = 0;
@@ -21,6 +26,22 @@ public class ServerProperties {
   private boolean enableTrafficMonitor = false;
   private int trafficMonitorInSeconds = 600;
   private List<ServerInstance> instanceList;
+
+  public File getIpRegionPath() {
+    return ipRegionPath;
+  }
+
+  public void setIpRegionPath(File ipRegionPath) {
+    this.ipRegionPath = ipRegionPath;
+  }
+
+  public String[] getAccessIpRegion() {
+    return accessIpRegion;
+  }
+
+  public void setAccessIpRegion(String[] accessIpRegion) {
+    this.accessIpRegion = accessIpRegion;
+  }
 
   public int getTrafficMonitorInSeconds() {
     return trafficMonitorInSeconds;

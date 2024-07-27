@@ -16,6 +16,8 @@ import net.shihome.nt.comm.netty.codec.NettyDataEntryDecoder;
 import net.shihome.nt.comm.netty.codec.NettyDataEntryEncoder;
 import net.shihome.nt.comm.rpc.RpcResponseFutureHandler;
 import net.shihome.nt.comm.utils.ThreadPoolUtil;
+import net.shihome.nt.server.common.IpRegionFilter;
+import net.shihome.nt.server.common.IpRegionUtils;
 import net.shihome.nt.server.config.ServerInstance;
 import net.shihome.nt.server.config.ServerProperties;
 import net.shihome.nt.server.rpc.NettyManageServerStarter;
@@ -40,20 +42,19 @@ public class NettyTcpInstanceStarter {
   private final NettyManageServerStarter nettyServerStarter;
   private final GlobalTrafficShapingHandler globalTrafficShapingHandler;
   private final RpcResponseFutureHandler rpcResponseFutureHandler;
+  private IpRegionUtils ipRegionUtils;
   private ThreadPoolExecutor serverHandlerPool;
 
-  public NettyTcpInstanceStarter(
-      EventLoopGroup bossGroup,
-      ServerProperties serverProperties,
-      NettyManageServerStarter nettyServerStarter,
-      GlobalTrafficShapingHandler globalTrafficShapingHandler,
-      RpcResponseFutureHandler rpcResponseFutureHandler) {
-    this.bossGroup = bossGroup;
-    this.serverProperties = serverProperties;
-    this.nettyServerStarter = nettyServerStarter;
-    this.globalTrafficShapingHandler = globalTrafficShapingHandler;
-    this.rpcResponseFutureHandler = rpcResponseFutureHandler;
-  }
+    public NettyTcpInstanceStarter(EventLoopGroup bossGroup, ServerProperties serverProperties, NettyManageServerStarter nettyServerStarter,
+            GlobalTrafficShapingHandler globalTrafficShapingHandler, RpcResponseFutureHandler rpcResponseFutureHandler,
+            IpRegionUtils ipRegionUtils) {
+        this.bossGroup = bossGroup;
+        this.serverProperties = serverProperties;
+        this.nettyServerStarter = nettyServerStarter;
+        this.globalTrafficShapingHandler = globalTrafficShapingHandler;
+        this.rpcResponseFutureHandler = rpcResponseFutureHandler;
+        this.ipRegionUtils = ipRegionUtils;
+    }
 
   public void start() {
 
@@ -99,6 +100,7 @@ public class NettyTcpInstanceStarter {
                               protected void initChannel(SocketChannel channel) {
                                 channel
                                     .pipeline()
+                                    .addLast(new IpRegionFilter(ipRegionUtils, instance.getAccessIpRegion()))
                                     .addLast(globalTrafficShapingHandler)
                                     .addLast(
                                         new IdleStateHandler(

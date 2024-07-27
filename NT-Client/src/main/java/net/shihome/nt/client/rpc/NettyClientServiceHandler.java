@@ -35,6 +35,7 @@ public class NettyClientServiceHandler extends SimpleChannelInboundHandler<RpcRe
       // do invoke
       serverHandlerPool.execute(
           () -> {
+            String sourceIp = rpcRequest.getSourceIp();
             try {
               if (rpcRequest.isNeedAck()) {
                 RpcResponse ackResponse = new RpcResponse();
@@ -53,15 +54,15 @@ public class NettyClientServiceHandler extends SimpleChannelInboundHandler<RpcRe
               }
             } catch (Throwable e) {
               ExceptionUtil.printException(
-                  logger, "exception caught, channel[{}]", new Object[] {ctx.channel()}, e);
+                  logger, "exception caught, channel[{}], sourceIp[{}]", new Object[] {ctx.channel(), sourceIp}, e);
               try {
                 if (StringUtils.hasText(channelId))
                   NettyTcpInstanceClient.getInstance().closeRemoteConnection(null, channelId, null);
               } catch (Throwable e2) {
                 ExceptionUtil.printException(
                     logger,
-                    "exception caught during close remote connection , channel[{}]",
-                    new Object[] {ctx.channel()},
+                    "exception caught during close remote connection , channel[{}], sourceIp[{}]",
+                    new Object[] {ctx.channel(), sourceIp},
                     e2);
               }
             }

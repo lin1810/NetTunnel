@@ -23,6 +23,8 @@ import net.shihome.nt.comm.netty.codec.NettyObjectEncoder;
 import net.shihome.nt.comm.rpc.RpcResponseFutureHandler;
 import net.shihome.nt.comm.service.RpcSerializer;
 import net.shihome.nt.comm.utils.ThreadPoolUtil;
+import net.shihome.nt.server.common.IpRegionFilter;
+import net.shihome.nt.server.common.IpRegionUtils;
 import net.shihome.nt.server.config.ServerProperties;
 import net.shihome.nt.server.service.ServerService;
 import org.slf4j.Logger;
@@ -52,6 +54,8 @@ public class NettyManageServerStarter {
   private ServerProperties serverProperties;
   @Resource
   private GlobalTrafficShapingHandler globalTrafficShapingHandler;
+  @Resource
+  private IpRegionUtils ipRegionUtils;
   private NettyManageServerRequestHandler nettyManageServerRequestHandler;
 
   public NettyManageServerStarter(
@@ -96,6 +100,7 @@ public class NettyManageServerStarter {
                           public void initChannel(SocketChannel channel) throws Exception {
                             channel
                                 .pipeline()
+                                .addLast(new IpRegionFilter(ipRegionUtils, serverProperties.getAccessIpRegion()))
                                 .addLast(globalTrafficShapingHandler)
                                 .addLast(
                                     new IdleStateHandler(

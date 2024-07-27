@@ -9,6 +9,7 @@ public class ServerInstance {
   private int permits = -1;
   private int permitsTimeoutInSecond = 15;
   private int slidingWindowSize = 10;
+  private String[] accessIpRegion;
 
   public int getPermitsTimeoutInSecond() {
     return permitsTimeoutInSecond;
@@ -60,6 +61,14 @@ public class ServerInstance {
 
   public boolean isEnableConnectionLog() {
     return enableConnectionLog;
+  }
+
+  public String[] getAccessIpRegion() {
+    return accessIpRegion;
+  }
+
+  public void setAccessIpRegion(String[] accessIpRegion) {
+    this.accessIpRegion = accessIpRegion;
   }
 
   public void setEnableConnectionLog(boolean enableConnectionLog) {

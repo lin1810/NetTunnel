@@ -5,7 +5,7 @@
     <parent>
         <artifactId>NetTunnel</artifactId>
         <groupId>com.shihome</groupId>
-        <version>1.0.0</version>
+        <version>v1.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,10 +17,13 @@
             <artifactId>NT-Common</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>hessian</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.lionsoul</groupId>
+            <artifactId>ip2region</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,6 +36,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
             </plugin>
         </plugins>
     </build>

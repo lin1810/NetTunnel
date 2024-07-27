@@ -6,6 +6,7 @@ import io.netty.handler.traffic.GlobalTrafficShapingHandler;
 import io.netty.handler.traffic.TrafficCounter;
 import net.shihome.nt.comm.rpc.RpcResponseFutureHandler;
 import net.shihome.nt.comm.utils.ThreadPoolUtil;
+import net.shihome.nt.server.common.IpRegionUtils;
 import net.shihome.nt.server.rpc.NettyManageServerStarter;
 import net.shihome.nt.server.service.ServerService;
 import net.shihome.nt.server.service.impl.CompositeServerService;
@@ -126,13 +127,15 @@ public class ServerAutoConfiguration {
         ServerProperties serverProperties,
         NettyManageServerStarter nettyServerStarter,
         GlobalTrafficShapingHandler globalTrafficShapingHandler,
-        RpcResponseFutureHandler rpcResponseFutureHandler) {
+        RpcResponseFutureHandler rpcResponseFutureHandler,
+        IpRegionUtils ipRegionUtils) {
       return new NettyTcpInstanceStarter(
           bossLoopGroup,
           serverProperties,
           nettyServerStarter,
           globalTrafficShapingHandler,
-          rpcResponseFutureHandler);
+          rpcResponseFutureHandler,
+          ipRegionUtils);
     }
   }
 }

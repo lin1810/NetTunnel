@@ -20,22 +20,23 @@ public class DataService implements ClientService {
   @Override
   public RpcResponse invoke(RpcRequest request) {
     DataEntry data = request.getData();
+    String sourceIp = request.getSourceIp();
     String instanceName = data.getInstanceName();
     String channelId = data.getChannelId();
     byte[] dataBytes = data.getBytes();
     boolean isClose = data.isClose();
     if (!isClose && (dataBytes == null || dataBytes.length == 0)) {
       logger.warn(
-          "received data message from instance:{}, channelId:{}, dataBytes size is empty",
+          "received data message from instance:{}, channelId:{}, sourceIp:{}, dataBytes size is empty",
           instanceName,
-          channelId);
+          channelId, sourceIp);
     }
 
     logger.debug(
-        "received data message from instance:{}, channelId:{}, dataBytes size:{}",
+        "received data message from instance:{}, channelId:{}, dataBytes size:{}, sourceIp:{}",
         instanceName,
         channelId,
-        dataBytes == null ? null : dataBytes.length);
+        dataBytes == null ? null : dataBytes.length, sourceIp);
     Future<Void> asyncSendFuture = NettyTcpInstanceClient.getInstance().asyncSend(data);
 
     asyncSendFuture.addListener(
@@ -44,16 +45,16 @@ public class DataService implements ClientService {
               if (f1.isDone() && !f1.isSuccess()) {
                 if (isClose) {
                   logger.debug(
-                      "close data send failed:{}, channel id:{}, instance:{}",
+                      "close data send failed:{}, channel id:{}, instance:{}, sourceIp:{}",
                       f1.cause().toString(),
                       channelId,
-                      instanceName);
+                      instanceName, sourceIp);
                 } else {
                   ExceptionUtil.printException(
                       logger,
-                      "connection to target serer failed, instance:{}, channelId:{}, request type:{}",
+                      "connection to target serer failed, instance:{}, channelId:{}, request type:{}, sourceIp:{}",
                       new Object[] {
-                        instanceName, channelId, request.getRequestType().getTypeName()
+                        instanceName, channelId, request.getRequestType().getTypeName(), sourceIp
                       },
                       f1.cause(),
                       ExceptionLevelEnum.info);

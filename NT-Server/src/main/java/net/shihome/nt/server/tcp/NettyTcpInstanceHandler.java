@@ -19,6 +19,7 @@ import net.shihome.nt.server.rpc.NettyManageServerStarter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.SocketAddress;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.Semaphore;
@@ -163,6 +164,10 @@ public class NettyTcpInstanceHandler extends SimpleChannelInboundHandler<DataEnt
     rpcRequest.setChannelId(id);
     rpcRequest.setData(msg);
     rpcRequest.setNeedAck(true);
+    SocketAddress socketAddress = channel.remoteAddress();
+    if (socketAddress != null) {
+      rpcRequest.setSourceIp(socketAddress.toString());
+    }
 
     if (slidingWindowList.add(msg.getSpanId())) {
       serverHandlerPool.execute(

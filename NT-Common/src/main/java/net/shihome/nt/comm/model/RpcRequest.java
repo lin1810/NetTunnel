@@ -9,7 +9,16 @@ public class RpcRequest implements Serializable {
   private RpcRequestTypeEnum requestType;
   private DataEntry data;
   private String channelId;
+  private String sourceIp;
   private boolean needAck;
+
+  public String getSourceIp() {
+    return sourceIp;
+  }
+
+  public void setSourceIp(String sourceIp) {
+    this.sourceIp = sourceIp;
+  }
 
   public String getChannelId() {
     return channelId;
