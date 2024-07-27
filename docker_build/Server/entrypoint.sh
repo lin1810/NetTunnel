@@ -51,7 +51,7 @@ addInstance() { local name="$1" port="$2" slidingWindowSize="${3:-""}" allowList
     if [ -n "$slidingWindowSize" ]; then
         echo "        sliding-window-size: $slidingWindowSize" >>$file
     fi
-    if [ -n "$allowLis" ]; then
+    if [ -n "$allowList" ]; then
             echo "        access-ip-region: $allowList" >>$file
         fi
     echo "" >>$file
