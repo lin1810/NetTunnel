@@ -2,6 +2,7 @@ package net.shihome.nt.server.common;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.ipfilter.AbstractRemoteAddressFilter;
+import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +18,9 @@ public class IpRegionFilter extends AbstractRemoteAddressFilter<InetSocketAddres
 
     public IpRegionFilter(IpRegionUtils regionUtils, String[] allowList) {
         this.regionUtils = regionUtils;
-        Arrays.sort(allowList,String::compareTo);
+        if (!ArrayUtils.isEmpty(allowList)) {
+            Arrays.sort(allowList, String::compareTo);
+        }
         this.allowList = allowList;
     }
 

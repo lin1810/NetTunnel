@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.StringTokenizer;
 
 @Component
@@ -33,6 +34,9 @@ public class IpRegionUtils implements InitializingBean, DisposableBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         File ipRegionPath = serverProperties.getIpRegionPath();
+        if (Objects.isNull(ipRegionPath)) {
+            return;
+        }
 
         byte[] cBuff;
         try (RandomAccessFile file = new RandomAccessFile(ipRegionPath, "r")) {
