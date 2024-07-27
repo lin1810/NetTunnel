@@ -48,12 +48,14 @@ public class CloseService implements ServerService {
                   NettyTcpInstanceContext nettyTcpInstanceContext =
                       channel1.attr(NettyTcpInstanceHandler.CONTEXT_ATTRIBUTE_KEY).get();
                   if (nettyTcpInstanceContext != null
-                      && nettyTcpInstanceContext.getPendingToSendSet().size() > 0) {
+                      && !nettyTcpInstanceContext.getPendingToSendSet().isEmpty()) {
                     scheduledExecutorService.schedule(
                         () -> closeChannel(channelId), 5, TimeUnit.SECONDS);
                   } else {
-                    logger.info("close channel({})", channelId);
-                    channel1.close();
+                    scheduledExecutorService.schedule(() -> {
+                      logger.info("close channel({})", channelId);
+                      channel1.close();
+                    }, 5, TimeUnit.SECONDS);
                   }
                 } else {
                   logger.debug(
