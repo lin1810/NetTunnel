@@ -1,8 +1,8 @@
 package net.shihome.nt.comm.utils;
 
+import jakarta.annotation.Resource;
 import org.springframework.util.IdGenerator;
 
-import javax.annotation.Resource;
 
 public class IdUtil {
 

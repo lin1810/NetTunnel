@@ -29,7 +29,7 @@ public class NtCommonAutoConfiguration {
     @Configuration(proxyBeanMethods = false)
     @ConditionalOnClass(value = Hessian2Input.class)
     @ConditionalOnMissingBean(RpcSerializer.class)
-    protected static class CommonHessianAutoConfiguration {
+    public static class CommonHessianAutoConfiguration {
         @Bean
         @ConditionalOnMissingBean
         public RpcSerializer rpcSerializer() {

@@ -13,6 +13,7 @@ import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.handler.traffic.GlobalTrafficShapingHandler;
 import io.netty.util.NettyRuntime;
 import io.netty.util.concurrent.Future;
+import jakarta.annotation.Resource;
 import net.shihome.nt.comm.constants.NtConstant;
 import net.shihome.nt.comm.model.RpcRequest;
 import net.shihome.nt.comm.model.RpcResponse;
@@ -29,7 +30,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.util.ClassUtils;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,9 +46,12 @@ public class NettyManageServerStarter {
   private final RpcResponseFutureHandler rpcResponseFutureHandler;
   private final EventLoopGroup bossGroup;
   private Thread thread;
-  @Resource private RpcSerializer rpcSerializer;
-  @Resource private ServerProperties serverProperties;
-  @Resource private GlobalTrafficShapingHandler globalTrafficShapingHandler;
+  @Resource
+  private RpcSerializer rpcSerializer;
+  @Resource
+  private ServerProperties serverProperties;
+  @Resource
+  private GlobalTrafficShapingHandler globalTrafficShapingHandler;
   private NettyManageServerRequestHandler nettyManageServerRequestHandler;
 
   public NettyManageServerStarter(

@@ -3,6 +3,7 @@ package net.shihome.nt.server.service.impl;
 import io.netty.channel.Channel;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.FutureListener;
+import jakarta.annotation.Resource;
 import net.shihome.nt.comm.model.RpcRequest;
 import net.shihome.nt.comm.model.RpcResponse;
 import net.shihome.nt.server.service.ServerService;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +22,8 @@ import java.util.concurrent.TimeUnit;
 public class CloseService implements ServerService {
   private static final Logger logger = LoggerFactory.getLogger(CloseService.class);
 
-  @Resource private ScheduledExecutorService scheduledExecutorService;
+  @Resource
+  private ScheduledExecutorService scheduledExecutorService;
 
   @Override
   public RpcResponse invoke(RpcRequest rpcRequest) {
@@ -55,7 +56,7 @@ public class CloseService implements ServerService {
                     scheduledExecutorService.schedule(() -> {
                       logger.info("close channel({})", channelId);
                       channel1.close();
-                    }, 5, TimeUnit.SECONDS);
+                    }, 1, TimeUnit.SECONDS);
                   }
                 } else {
                   logger.debug(

@@ -11,6 +11,7 @@ import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.FutureListener;
 import io.netty.util.concurrent.Promise;
 import io.netty.util.internal.ObjectUtil;
+import jakarta.annotation.Resource;
 import net.shihome.nt.comm.exception.ExceptionLevelEnum;
 import net.shihome.nt.comm.exception.NtException;
 import net.shihome.nt.comm.model.RpcRequest;
@@ -22,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 
-import javax.annotation.Resource;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -38,7 +38,8 @@ public class NettyTcpInstanceChannelHolder {
   private final ChannelHealthChecker healthCheck = ChannelHealthChecker.ACTIVE;
   private EventLoopGroup workerGroup;
 
-  @Resource private NettyManageServerStarter nettyServerStarter;
+  @Resource
+  private NettyManageServerStarter nettyServerStarter;
 
   protected NettyTcpInstanceChannelHolder() {
     INSTANCE = this;
