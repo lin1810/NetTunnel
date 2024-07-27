@@ -6,19 +6,15 @@ nt:
 #    server-cert-path: /tmp/server.crt
 #    server-key-path: /tmp/pkcs8_server.key
 #    server-key-password:
-#    ip-region-path: /tmp/ip2region.xdb  # https://gitee.com/lionsoul/ip2region/blob/master/data/ip2region.xdb
+    ip-region-path: /tmp/ip2region.xdb  # https://gitee.com/lionsoul/ip2region/blob/master/data/ip2region.xdb
+    access-ip-region: 中国|0
     instance-list:
       - instance-name: remote.ssh
         port: 922
-#        access-ip-region:
-#          - 中国
+        access-ip-region: 中国
       - instance-name: remote.https
         port: 9443
-#        access-ip-region:
-#          - 中国
-#    access-ip-region:
-#      - 中国
-#      - 0 #内网 IP
+        access-ip-region: 中国
 #logging:
 #  level:
 #    net.shihome.nt.server.tcp: DEBUG

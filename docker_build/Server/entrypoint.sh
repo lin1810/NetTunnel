@@ -26,13 +26,14 @@ usage() { local RC="${1:-0}"
     echo "Usage: ${0##*/} [-opt] [command]
 Options (fields in '[]' are optional, '<>' are required):
     -h          This help
-    -i \"<name;port>[;slidingWindowSize]\"
+    -i \"<name;port>[;slidingWindowSize][;allList]\"
                 Configure a tunnel
                 required arg: \"<name>;<port>\"
                 <name> tunnel name
                 <port> tunnel bind port
                 NOTE: for the default value, just leave blank
                 [slidingWindowSize] default:'10'
+                [all IP Region List split by delim char '|']
 " >&2
     exit $RC
 }
@@ -43,13 +44,16 @@ Options (fields in '[]' are optional, '<>' are required):
 #   port) tunnel bind port
 #   slidingWindowSize) Integer, default:'10'
 # Return: result
-addInstance() { local name="$1" port="$2" slidingWindowSize="${3:-""}"  \
+addInstance() { local name="$1" port="$2" slidingWindowSize="${3:-""}" allowList="${4:-""}"  \
                 file=$CONFIG_PATH/application-instance.yml
     echo "      - instance-name: $name" >>$file
     echo "        port: $port" >>$file
     if [ -n "$slidingWindowSize" ]; then
         echo "        sliding-window-size: $slidingWindowSize" >>$file
     fi
+    if [ -n "$allowLis" ]; then
+            echo "        access-ip-region: $allowList" >>$file
+        fi
     echo "" >>$file
 }
 

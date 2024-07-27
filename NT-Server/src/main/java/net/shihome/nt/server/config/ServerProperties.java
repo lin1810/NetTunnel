@@ -18,7 +18,7 @@ public class ServerProperties {
    * ip2region.xdb path
    */
   private File ipRegionPath;
-  private String[] accessIpRegion;
+  private String accessIpRegion;
   private String serverKeyPassword;
   private File caPath;
   private double writeLimit = 0;
@@ -35,11 +35,11 @@ public class ServerProperties {
     this.ipRegionPath = ipRegionPath;
   }
 
-  public String[] getAccessIpRegion() {
+  public String getAccessIpRegion() {
     return accessIpRegion;
   }
 
-  public void setAccessIpRegion(String[] accessIpRegion) {
+  public void setAccessIpRegion(String accessIpRegion) {
     this.accessIpRegion = accessIpRegion;
   }
 

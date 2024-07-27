@@ -5,6 +5,7 @@ nt:
     ca-path: ${CERT_PATH}/ca.crt
     server-cert-path: ${CERT_PATH}/server.crt
     server-key-path: ${CERT_PATH}/server_pkcs8.key
+    ip-region-path: ${BASE_PATH}/ip2region.xdb
 #    server-key-password:
 #logging:
 #  level:
