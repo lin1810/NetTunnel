@@ -60,6 +60,6 @@ jobs:
         uses: docker/setup-buildx-action@v2
       - name: "Build and save docker images"
         env:
-          BASE_IMAGE: eclipse-temurin:17-jre-alpine
+          BASE_IMAGE: eclipse-temurin:17-jre-jammy
         run: |
           make docker.push || make docker.push

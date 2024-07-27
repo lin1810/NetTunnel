@@ -1,4 +1,4 @@
-ARG BASE_IMAGE='eclipse-temurin:17-jre-alpine'
+ARG BASE_IMAGE='eclipse-temurin:17-jre-jammy'
 FROM $BASE_IMAGE
 ARG JAVA_OPTS
 ARG BASE_PATH=/NT
