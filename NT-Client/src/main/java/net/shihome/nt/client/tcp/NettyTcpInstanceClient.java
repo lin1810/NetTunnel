@@ -33,10 +33,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.CustomizableThreadFactory;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.comparator.Comparators;
 
+import java.util.Comparator;
 import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 public abstract class NettyTcpInstanceClient {
   public static final AttributeKey<NettyTcpInstanceClientContext> CONTEXT_ATTRIBUTE_KEY =
@@ -132,9 +135,10 @@ public abstract class NettyTcpInstanceClient {
         instanceClientContext.setSemaphore(new Semaphore(permits, true));
       }
       int slidingWindowSize = instance.getSlidingWindowSize();
-      if (slidingWindowSize > 1) {
-        instanceClientContext.setSlidingWindowList(new SlidingWindowList(slidingWindowSize));
+      if (slidingWindowSize <= 0) {
+        throw new NtException(ExceptionLevelEnum.error, "slidingWindowSize is invalid");
       }
+      instanceClientContext.setSlidingWindowList(new SlidingWindowList(slidingWindowSize));
       channel.attr(NettyTcpInstanceClient.CONTEXT_ATTRIBUTE_KEY).setIfAbsent(instanceClientContext);
       channel
           .closeFuture()

@@ -60,6 +60,7 @@ public class NettyTcpInstanceClientChannelPoolHandler implements ChannelPoolHand
     SocketChannel channel = (SocketChannel) ch;
     channel.config().setKeepAlive(true);
     channel.config().setTcpNoDelay(true);
+    channel.config().setAutoClose(false);
     channel
         .pipeline()
         .addLast(new IdleStateHandler(0, 0, NtConstant.INSTANCE_KEEP_ALIVE, TimeUnit.MINUTES))

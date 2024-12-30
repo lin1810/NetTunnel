@@ -23,6 +23,7 @@ public class DataService implements ClientService {
     String sourceIp = request.getSourceIp();
     String instanceName = data.getInstanceName();
     String channelId = data.getChannelId();
+    Long spanId = data.getSpanId();
     byte[] dataBytes = data.getBytes();
     boolean isClose = data.isClose();
     if (!isClose && (dataBytes == null || dataBytes.length == 0)) {
@@ -33,10 +34,10 @@ public class DataService implements ClientService {
     }
 
     logger.debug(
-        "received data message from instance:{}, channelId:{}, dataBytes size:{}, sourceIp:{}",
+        "received data message from instance:{}, channelId:{}, dataBytes size:{}, sourceIp:{}, spanId:{}",
         instanceName,
         channelId,
-        dataBytes == null ? null : dataBytes.length, sourceIp);
+        dataBytes == null ? null : dataBytes.length, sourceIp, spanId);
     Future<Void> asyncSendFuture = NettyTcpInstanceClient.getInstance().asyncSend(data);
 
     asyncSendFuture.addListener(

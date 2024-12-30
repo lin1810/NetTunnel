@@ -11,23 +11,25 @@ import java.util.List;
 
 public class NettyDataEntryDecoder extends ByteToMessageDecoder {
 
-  private static final Logger logger = LoggerFactory.getLogger(NettyDataEntryDecoder.class);
+    private static final Logger logger = LoggerFactory.getLogger(NettyDataEntryDecoder.class);
 
-  @Override
-  protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
-    try {
-      int dataLength = in.readableBytes();
-      if (dataLength == 0) {
-        return;
-      }
-      byte[] data = new byte[dataLength];
-      in.readBytes(data);
-      DataEntry dataEntry = new DataEntry();
-      dataEntry.setBytes(data);
-      out.add(dataEntry);
-    } catch (Throwable throwable) {
-      logger.error("exception caught", throwable);
-      ctx.close();
+    @Override
+    protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
+        try {
+            if (in.isReadable()) {
+                int dataLength = in.readableBytes();
+                if (dataLength == 0) {
+                    return;
+                }
+                byte[] data = new byte[dataLength];
+                in.readBytes(data);
+                DataEntry dataEntry = new DataEntry();
+                dataEntry.setBytes(data);
+                out.add(dataEntry);
+            }
+        } catch (Throwable throwable) {
+            logger.error("exception caught", throwable);
+            ctx.close();
+        }
     }
-  }
 }

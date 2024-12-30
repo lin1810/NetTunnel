@@ -120,15 +120,11 @@ public class NettyTcpInstanceClientHandler extends SimpleChannelInboundHandler<D
       ConcurrentSkipListSet<DataEntry> pendingToManageSet =
           nettyTcpInstanceClientContext.getPendingToManageSet();
       SlidingWindowList slidingWindowList = nettyTcpInstanceClientContext.getSlidingWindowList();
-      if (slidingWindowList != null) {
-        if (slidingWindowList.remove(result)) {
+      if (slidingWindowList.remove(result)) {
+        synchronized (slidingWindowList) {
           DataEntry dataEntry = pendingToManageSet.pollFirst();
-          while (dataEntry != null
-              && sendDataEntry(dataEntry, channel, nettyTcpInstanceClientContext)) {
-            logger.debug(
-                "ACKed, sending pending data, channel id[{}], span id[{}]",
-                channelId,
-                dataEntry.getSpanId());
+          while (dataEntry != null && sendDataEntry(dataEntry, channel, nettyTcpInstanceClientContext)) {
+            logger.debug("ACKed, sending pending data, channel id[{}], span id[{}]", channelId, dataEntry.getSpanId());
             dataEntry = pendingToManageSet.pollFirst();
           }
         }

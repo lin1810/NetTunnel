@@ -7,6 +7,8 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.AttributeKey;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.FutureListener;
+import net.shihome.nt.comm.exception.ExceptionLevelEnum;
+import net.shihome.nt.comm.exception.NtException;
 import net.shihome.nt.comm.lang.SlidingWindowList;
 import net.shihome.nt.comm.model.*;
 import net.shihome.nt.comm.model.data.DataEntry;
@@ -62,9 +64,10 @@ public class NettyTcpInstanceHandler extends SimpleChannelInboundHandler<DataEnt
       tcpInstanceContext.setSemaphore(new Semaphore(permits, true));
     }
     int slidingWindowSize = instance.getSlidingWindowSize();
-    if (slidingWindowSize > 1) {
-      tcpInstanceContext.setSlidingWindowList(new SlidingWindowList(slidingWindowSize));
+    if (slidingWindowSize <= 0) {
+      throw new NtException(ExceptionLevelEnum.error, id + " slidingWindowSize is invalid");
     }
+    tcpInstanceContext.setSlidingWindowList(new SlidingWindowList(slidingWindowSize));
     NettyTcpInstanceContext nettyTcpInstanceContext =
         channel.attr(CONTEXT_ATTRIBUTE_KEY).setIfAbsent(tcpInstanceContext);
     if (nettyTcpInstanceContext != null) {
@@ -134,15 +137,11 @@ public class NettyTcpInstanceHandler extends SimpleChannelInboundHandler<DataEnt
                       nettyTcpInstanceContext.getPendingToManageSet();
                   SlidingWindowList slidingWindowList =
                       nettyTcpInstanceContext.getSlidingWindowList();
-                  if (slidingWindowList != null) {
-                    if (slidingWindowList.remove(result)) {
+                  if (slidingWindowList.remove(result)) {
+                    synchronized (slidingWindowList) {
                       DataEntry dataEntry = pendingToManageSet.pollFirst();
-                      while (dataEntry != null
-                          && sendDataEntry(dataEntry, channel, nettyTcpInstanceContext)) {
-                        logger.debug(
-                            "ACKed, sending pending data, channel id[{}], span id[{}]",
-                            channelId,
-                            dataEntry.getSpanId());
+                      while (dataEntry != null && sendDataEntry(dataEntry, channel, nettyTcpInstanceContext)) {
+                        logger.debug("ACKed, sending pending data, channel id[{}], span id[{}]", channelId, dataEntry.getSpanId());
                         dataEntry = pendingToManageSet.pollFirst();
                       }
                     }
